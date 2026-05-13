@@ -2,52 +2,45 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Login</title>
-
+    <title>Login - My Store</title>
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
 
+    <nav>
+        <h1 class="logo">🛒 My Store</h1>
+        <div id="authLinks" class="nav-links"></div>
+        <span id="userStatus" class="user-status"></span>
+    </nav>
+
     <div class="form-container">
-
-        <h1>Login</h1>
-
+        <h1>Login to Your Account</h1>
         <form id="loginForm">
-
             <input 
                 type="email" 
                 id="email" 
-                placeholder="Enter Email"
+                placeholder="Enter Your Email"
                 required
             >
-
             <input 
                 type="password" 
                 id="password" 
-                placeholder="Enter Password"
+                placeholder="Enter Your Password"
                 required
             >
-
-            <button type="submit">
-                Login
-            </button>
-
+            <button type="submit" class="btn-primary">Login</button>
         </form>
-
         <p>
             Don't have an account?
-            <a href="register.html">Register</a>
+            <a href="register.html">Register here</a>
         </p>
-
     </div>
 
+    <script src="js/toast.js"></script>
+    <script src="js/session.js"></script>
     <script src="js/auth.js"></script>
 
 </body>

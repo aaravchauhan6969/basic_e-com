@@ -10,49 +10,63 @@ async function loadCart() {
         localStorage.getItem("cart")
     ) || [];
 
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
+          <div class="empty-state">
+            <h2>Your cart is empty</h2>
+            <p>Add some products to get started!</p>
+            <a href="products.html" class="btn-primary">Continue Shopping</a>
+          </div>
+        `;
+        totalElement.innerHTML = "";
+        return;
+    }
+
     cartItems.innerHTML = "";
 
     total = 0;
 
     for(const item of cart) {
 
-        const response = await fetch(
-            `http://localhost:5000/api/products/${item.id}`
-        );
+        try {
+            const response = await fetch(
+                `/api/products/${item.id}`
+            );
 
-        const product = await response.json();
+            if (!response.ok) throw new Error("Product not found");
 
-        total += product.price * item.quantity;
+            const product = await response.json();
 
-        cartItems.innerHTML += `
+            total += product.price * item.quantity;
 
-        <div class="card">
+            cartItems.innerHTML += `
 
-            <img src="${product.image}" width="200">
+            <div class="card">
 
-            <h2>${product.name}</h2>
+                <img src="${product.image}" width="200" alt="${product.name}">
 
-            <h3>₹${product.price}</h3>
+                <h2>${product.name}</h2>
 
-            <p>Quantity: ${item.quantity}</p>
+                <h3>₹${product.price.toLocaleString()}</h3>
 
-            <button onclick="increaseQuantity('${item.id}')">
-                +
-            </button>
+                <p>Quantity: <strong>${item.quantity}</strong></p>
 
-            <button onclick="decreaseQuantity('${item.id}')">
-                -
-            </button>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button onclick="increaseQuantity('${item.id}')" class="btn-secondary" style="flex: 1; margin: 0;">+</button>
 
-            <button onclick="removeItem('${item.id}')">
-                Remove
-            </button>
+                    <button onclick="decreaseQuantity('${item.id}')" class="btn-secondary" style="flex: 1; margin: 0;">-</button>
 
-        </div>
-        `;
+                    <button onclick="removeItem('${item.id}')" class="btn-secondary" style="flex: 1; margin: 0;">Remove</button>
+                </div>
+
+            </div>
+            `;
+        } catch (error) {
+            console.error("Error loading product:", error);
+        }
     }
 
-    totalElement.innerText = `Total: ₹${total}`;
+    totalElement.innerHTML = `<strong>Total Amount: ₹${total.toLocaleString()}</strong>`;
 }
 
 function increaseQuantity(id) {
@@ -123,7 +137,7 @@ async function checkout() {
 
     if(!token) {
 
-        alert("Please Login First");
+        showToast("Please login first.", "error");
 
         window.location.href = "login.html";
 
@@ -134,30 +148,42 @@ async function checkout() {
         localStorage.getItem("cart")
     );
 
-    const response = await fetch(
-        "http://localhost:5000/api/orders",
-        {
-            method: "POST",
+    if (cart.length === 0) {
+        showToast("Your cart is empty!", "info");
+        return;
+    }
 
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": token
-            },
+    try {
+        const response = await fetch(
+            "/api/orders",
+            {
+                method: "POST",
 
-            body: JSON.stringify({
-                products: cart,
-                totalPrice: total
-            })
-        }
-    );
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
 
-    const data = await response.json();
+                body: JSON.stringify({
+                    products: cart,
+                    totalPrice: total
+                })
+            }
+        );
 
-    alert("Order Placed Successfully");
+        if (!response.ok) throw new Error("Failed to place order");
 
-    localStorage.removeItem("cart");
+        const data = await response.json();
 
-    window.location.href = "index.html";
+        showToast("Order placed successfully!", "success");
+
+        localStorage.removeItem("cart");
+
+        window.location.href = "orders.html";
+    } catch (error) {
+        console.error("Checkout error:", error);
+        showToast("Failed to place order. Please try again.", "error");
+    }
 }
 
 loadCart();

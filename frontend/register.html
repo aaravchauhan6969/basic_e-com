@@ -2,59 +2,51 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Register</title>
-
+    <title>Register - My Store</title>
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
 
+    <nav>
+        <h1 class="logo">🛒 My Store</h1>
+        <div id="authLinks" class="nav-links"></div>
+        <span id="userStatus" class="user-status"></span>
+    </nav>
+
     <div class="form-container">
-
-        <h1>Register</h1>
-
+        <h1>Create Your Account</h1>
         <form id="registerForm">
-
             <input 
                 type="text" 
                 id="name" 
-                placeholder="Enter Name"
+                placeholder="Full Name"
                 required
             >
-
             <input 
                 type="email" 
                 id="email" 
-                placeholder="Enter Email"
+                placeholder="Email Address"
                 required
             >
-
             <input 
                 type="password" 
                 id="password" 
-                placeholder="Enter Password"
+                placeholder="Create Password"
                 required
             >
-
-            <button type="submit">
-                Register
-            </button>
-
+            <button type="submit" class="btn-primary">Register</button>
         </form>
-
         <p>
             Already have an account?
-            <a href="login.html">Login</a>
+            <a href="login.html">Login here</a>
         </p>
-
     </div>
 
+    <script src="js/toast.js"></script>
+    <script src="js/session.js"></script>
     <script src="js/auth.js"></script>
 
 </body>

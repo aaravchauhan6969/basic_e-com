@@ -16,29 +16,28 @@
 <body>
 
     <nav>
-
-        <h1>My Store</h1>
-
-        <div>
-
-            <a href="index.html">Home</a>
-
-            <a href="cart.html">Cart</a>
-
-            <a href="login.html">Login</a>
-
-        </div>
-
+        <h1 class="logo">🛒 My Store</h1>
+        <div id="authLinks" class="nav-links"></div>
+        <span id="userStatus" class="user-status"></span>
     </nav>
 
-    <h1 class="heading">
-        Products
-    </h1>
-
-    <div class="products" id="products">
-
+    <div class="container">
+        <h1>Our Products</h1>
+        
+        <div class="search-bar">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Search by name or description..."
+            >
+        </div>
+        
+        <div class="products" id="products">
+        </div>
     </div>
 
+    <script src="js/toast.js"></script>
+    <script src="js/session.js"></script>
     <script src="js/app.js"></script>
 
 </body>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Profile</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <nav>
+
+        <h1 class="logo">🛒 My Store</h1>
+
+        <div id="authLinks" class="nav-links"></div>
+
+        <span id="userStatus" class="user-status"></span>
+
+    </nav>
+
+    <div class="container">
+
+        <div class="profile-container">
+
+            <h1>My Profile</h1>
+
+            <div class="profile-card">
+
+                <div class="profile-field">
+
+                    <label>Name</label>
+
+                    <p id="profileName" class="profile-value">Loading...</p>
+
+                </div>
+
+                <div class="profile-field">
+
+                    <label>Email</label>
+
+                    <p id="profileEmail" class="profile-value">Loading...</p>
+
+                </div>
+
+                <div class="profile-field">
+
+                    <label>Account Role</label>
+
+                    <p id="profileRole" class="profile-value">Loading...</p>
+
+                </div>
+
+                <div class="profile-field">
+
+                    <label>Member Since</label>
+
+                    <p id="profileJoined" class="profile-value">Loading...</p>
+
+                </div>
+
+                <div class="profile-field">
+
+                    <label>Items Added To Cart</label>
+
+                    <p id="profileAdds" class="profile-value">0</p>
+
+                </div>
+
+                <button id="editBtn" class="btn-primary">Edit Profile</button>
+
+            </div>
+
+            <div id="cartSummary"></div>
+
+            <div id="editForm" class="profile-form" style="display: none;">
+
+                <h2>Edit Profile</h2>
+
+                <form>
+
+                    <div class="form-group">
+
+                        <label for="editName">Name</label>
+
+                        <input type="text" id="editName" required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="editPassword">New Password (leave blank to keep current)</label>
+
+                        <input type="password" id="editPassword">
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button type="submit" class="btn-primary">Save Changes</button>
+
+                        <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/toast.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/profile.js"></script>
+
+</body>
+
+</html>

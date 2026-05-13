@@ -35,5 +35,5 @@ productForm.addEventListener("submit", async(e) => {
 
     const data = await response.json();
 
-    alert("Product Added");
+    showToast("Product added successfully", "success");
 });
